@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earthing Continuity Faults</title>
+    <link rel="stylesheet" href="css/fault-pages.css">
+</head>
+<body>
+    <header>
+        <h1>Leak Current faults</h1>
+        <a href="../trial2/data_page.html" class="back-btn">Back to Dashboard</a>
+    </header>
+    
+    <main>
+        <div class="filters">
+            <input type="date" id="fromDate" class="date-filter">
+            <input type="date" id="toDate" class="date-filter">
+            <button id="filterBtn">Filter</button>
+        </div>
+
+        <table id="faultTable">
+            <thead>
+                <tr>
+                    <th>Pole ID</th>
+                    <th>Location</th>
+                    <th>Leak Current</th>
+                    <th>Earthing Status</th>
+                    <th>Resistance</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+
+    <script type="module">
+        import { subscribeToPolesData } from './js/database.js';
+        import { getLeakageFaults } from './js/faultUtils.js';
+        import { renderFaultTable } from './js/tableRenderer.js';
+    
+        const table = document.getElementById('faultTable');
+        const filterBtn = document.getElementById('filterBtn');
+    
+        let polesData = [];
+    
+        // Subscribe to poles data and store it in a variable
+        subscribeToPolesData((poles) => {
+            polesData = poles; // Cache the data
+            renderFaultTable(poles, table, 'all'); // Render full data initially
+        });
+    
+        // Add event listener for the filter button
+        filterBtn.addEventListener('click', () => {
+            const leakageFaults = getLeakageFaults(polesData);
+            renderFaultTable(leakageFaults, table, 'leakage');
+        });
+
+
+
+    </script>
+    
+</body>
+</html>

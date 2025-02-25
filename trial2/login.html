@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Monitor - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-container">
+    <div class="login-container">
+      <div class="login-form">
+        <h2>Log In Page</h2>
+        <form id="loginForm" onsubmit="return false;">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrapper">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0110 0v4"></path>
+              </svg>
+              <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+          </div>
+          <button type="button" id="login-btn" class="login-button">Sign In</button>
+        </form>
+        <p class="error" id="error-message"></p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Import Firebase dependencies
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCcr9tC_tYqaRfMCsJ1AuLxWfgBgOKj43s",
+      authDomain: "trial-58b78.firebaseapp.com",
+      databaseURL: "https://trial-58b78-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "trial-58b78",
+      storageBucket: "trial-58b78.firebasestorage.app",
+      messagingSenderId: "437171267528",
+      appId: "1:437171267528:web:fd339ebec974015a4b02fd",
+      measurementId: "G-V507ZTQCRW"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    // Handle login button click
+    document.getElementById("login-btn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Login successful
+          console.log("User logged in:", userCredential.user);
+          window.location.href = "data_page.html"; // Redirect to data page
+        })
+        .catch((error) => {
+          // Display error message
+          const errorMessage = error.message;
+          document.getElementById("error-message").innerText = 'Invalid-credentials';
+        });
+    });
+  </script>
+</body>
+</html>

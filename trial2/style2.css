@@ -1,0 +1,208 @@
+
+:root {
+    --primary-color: #4f46e5;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --success-color: #10b981;
+    --sidebar-width: 300px;
+    --dark-bg: #1e293b;
+    --light-bg: #f8fafc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr var(--sidebar-width);
+    min-height: 100vh;
+    background: var(--light-bg);
+    overflow-x: hidden;
+}
+
+/* Left Sidebar */
+.left-sidebar {
+    background: var(--dark-bg);
+    padding: 2rem;
+    height: 100vh;
+    position: fixed;
+    width: var(--sidebar-width);
+    color: white;
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.nav-menu {
+    margin-top: 3rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateX(5px);
+}
+
+.nav-item.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.nav-item i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Main Content */
+.main-content {
+    grid-column: 2;
+    padding: 2rem;
+    margin-left: 25px;
+    margin-right: 25px;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Right Sidebar */
+.right-sidebar {
+    background: white;
+    padding: 2rem;
+    position: fixed;
+    right: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+    animation: slideInRight 0.5s ease-out;
+}
+
+.fault-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.fault-card:hover {
+    transform: translateY(-5px);
+}
+
+.fault-card.critical {
+    background: linear-gradient(to right, #fee2e2, #fef2f2);
+    border-left: 4px solid var(--danger-color);
+}
+
+.fault-card.warning {
+    background: linear-gradient(to right, #fef3c7, #fffbeb);
+    border-left: 4px solid var(--warning-color);
+}
+
+.fault-card.info {
+    background: linear-gradient(to right, #e0e7ff, #eef2ff);
+    border-left: 4px solid var(--primary-color);
+}
+
+.fault-count {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+/* Pole Cards */
+.poles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.pole-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.pole-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.pole-card.has-fault {
+    border-left: 4px solid var(--danger-color);
+}
+
+.measurement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.value-fault {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+.value-normal {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 1200px) {
+    body {
+        grid-template-columns: 1fr;
+    }
+
+    .left-sidebar, .right-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}

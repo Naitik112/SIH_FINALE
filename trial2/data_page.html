@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pole Monitoring System</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="./style2.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Left Sidebar -->
+    <aside class="left-sidebar">
+        <h1 class="dashboard-title">Smart Pole Monitor</h1>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active">
+                <i>🏠</i>
+                Dashboard
+            </a>
+            <a href="#" class="nav-item">
+                <i>📊</i>
+                Analytics
+            </a>
+            <a href="#" class="nav-item">
+                <i>🔔</i>
+                Notifications
+            </a>
+            <a href="#" class="nav-item">
+                <i>⚙️</i>
+                Settings
+            </a>
+            
+            <div style="margin: 2rem 0; border-top: 1px solid rgba(255,255,255,0.1);"></div>
+            
+            <div class="filter-buttons">
+                <button id="showAll" class="nav-item active">All Poles</button>
+                <button id="showFaults" class="nav-item">Faults Only</button>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div id="map"></div> <!-- Map container -->
+        <div id="polesGrid" class="poles-grid"></div>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="right-sidebar">
+        <h2 style="margin-bottom: 2rem; color: #1e293b;">Fault Summary</h2>
+        <div class="fault-cards">
+            <div class="fault-card critical">
+                <h3>Earthing Continuity Faults</h3>
+                <div id="earthingFaults" class="fault-count">0</div>
+            </div>
+            <div class="fault-card warning">
+                <h3>Current Leakage Faults</h3>
+                <div id="leakageFaults" class="fault-count">0</div>
+            </div>
+            <div class="fault-card info">
+                <h3>High Resistance</h3>
+                <div id="resistanceFaults" class="fault-count">0</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Your custom script -->
+    <script type="module" src="./script.js"></script>
+
+</body>
+</html>
+
+
+
